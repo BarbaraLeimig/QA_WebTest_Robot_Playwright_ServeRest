@@ -27,5 +27,7 @@ Preencher os dados do novo usuário e cadastrar
     Fill Text    css=\#email       ${EMAIL}
     Fill Text    css=\#password    aluno123
     Check Checkbox    css=\#administrador
-    Click        css=.btn-primary
+    # Click        css=.btn-primary
+    # seletor em cascata:
+    Click        xpath=//*[@id="root"]//button >> text="Cadastrar"
     Sleep    5s
