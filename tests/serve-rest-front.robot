@@ -13,3 +13,8 @@ Desafio: Conferir se o novo usuário é mostrado na listagem de usuários
     Cadastrar novo usuário
     Acessar a Lista de usuários
     Conferir que o usuário aparece na listagem
+
+Desafio: Cadastro e Consulta de Produtos
+  Cadastrar novo usuário
+  Cadastrar um novo produto
+  Conferir que o produto aparece na listagem
