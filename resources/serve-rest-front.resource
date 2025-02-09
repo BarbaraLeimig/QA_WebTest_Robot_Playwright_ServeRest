@@ -7,7 +7,7 @@ Library  DateTime
 
 *** Variables ***
 ${BROWSER}           chromium
-${HEADLESS}          ${true}
+${HEADLESS}          ${false}
 ${SITE_SERVE_REST}   https://front.serverest.dev/
 
 *** Keywords ***
@@ -75,3 +75,28 @@ Conferir que o produto aparece na listagem
   ${descricao}  Get Text  ${elemento}  ==  Produto Teste Robot Framework
   Highlight Elements    ${elemento}
   Take Screenshot       fullPage=${true}
+
+Criar usuário via API
+    ${EMAIL}  FakerLibrary.Email
+    Set Test Variable    ${EMAIL}
+
+    ${resposta}  Http    url=https://serverest.dev/usuarios
+    ...                  method=POST
+    ...                  body={"nome": "Mayara Fernandes","email": "${EMAIL}","password": "123456","administrador": "true"}   
+
+    Should Be Equal As Integers    ${resposta["status"]}    201
+
+Logar com o usuário cadastrado via API
+    ${resposta}  Http    url=https://serverest.dev/login
+    ...                  method=POST
+    ...                  body={"email": "${EMAIL}","password": "123456"}
+    
+    Should Be Equal As Integers    ${resposta["status"]}    200
+
+    LocalStorage Set Item    serverest/userEmail    ${EMAIL}
+    LocalStorage Set Item    serverest/userToken    ${resposta["body"]["authorization"]}
+    LocalStorage Set Item    serverest/userNome     Mayara Fernandes
+
+    Go To    url=https://front.serverest.dev/admin/home
+
+    Take Screenshot

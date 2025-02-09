@@ -14,7 +14,13 @@ Desafio: Conferir se o novo usuário é mostrado na listagem de usuários
     Acessar a Lista de usuários
     Conferir que o usuário aparece na listagem
 
-Desafio: Cadastro e Consulta de Produtos
+Bora praticar mais: Cadastro e Consulta de Produtos
   Cadastrar novo usuário
   Cadastrar um novo produto
   Conferir que o produto aparece na listagem
+
+Exemplo utilizando Requisições HTTP
+  Abrir o navegador
+  Ir para o site Serve Rest Front
+  Criar usuário via API
+  Logar com o usuário cadastrado via API
