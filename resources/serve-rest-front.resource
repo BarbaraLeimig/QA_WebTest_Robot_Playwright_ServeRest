@@ -16,6 +16,8 @@ Abrir o navegador
 
 Ir para o site Serve Rest Front
     New Page       url=${SITE_SERVE_REST}
+    ${title}       Get Title    ==     Front - ServeRest
+    Log    ${title}
 
 Preencher os dados do novo usuário e cadastrar
     Click        css=.btn-link
@@ -31,3 +33,6 @@ Preencher os dados do novo usuário e cadastrar
     # seletor em cascata:
     Click        xpath=//*[@id="root"]//button >> text="Cadastrar"
     Sleep    5s
+
+Conferir usuário cadastrado com sucesso
+    Wait For Elements State    h1    visible
