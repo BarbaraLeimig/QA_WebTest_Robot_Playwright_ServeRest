@@ -7,7 +7,7 @@ Library  DateTime
 
 *** Variables ***
 ${BROWSER}           chromium
-${HEADLESS}          ${false}
+${HEADLESS}          ${true}
 ${SITE_SERVE_REST}   https://front.serverest.dev/
 
 *** Keywords ***
@@ -32,7 +32,7 @@ Preencher os dados do novo usuário e cadastrar
     # Click    text="Cadastre-se"
     Click       css=a[data-testid='cadastrar']
     ${EMAIL}    FakerLibrary.Email
-    Set Test Variable    ${EMAIL}
+    Set Suite Variable    ${EMAIL}
     Fill Text   css=input[data-testid='nome']       Mayara Fernandes
     Fill Text   css=input[data-testid='email']      ${EMAIL}
     Fill Text   css=input[data-testid='password']   123456
@@ -78,7 +78,7 @@ Conferir que o produto aparece na listagem
 
 Criar usuário via API
     ${EMAIL}  FakerLibrary.Email
-    Set Test Variable    ${EMAIL}
+    Set Suite Variable    ${EMAIL}
 
     ${resposta}  Http    url=https://serverest.dev/usuarios
     ...                  method=POST
@@ -99,4 +99,21 @@ Logar com o usuário cadastrado via API
 
     Go To    url=https://front.serverest.dev/admin/home
 
+    Take Screenshot
+
+Cadastrar Usuário e Logar
+    New Browser
+    New Page      url=${SITE_SERVE_REST}
+    Criar usuário via API
+    Logar com o usuário cadastrado via API
+    ${STORAGE_FILE}  Save Storage State
+    Set Suite Variable  ${STORAGE_FILE}
+
+Abrir o Site Serve Rest Front Logado
+    New Browser    browser=${BROWSER}
+    ...            headless=${HEADLESS}
+    New Context    viewport={'width': 1200, 'height': 800}
+    ...            storageState=${STORAGE_FILE}
+    New Page       url=https://front.serverest.dev/admin/home
+    Get Text       h1  ==  Bem Vindo Mayara Fernandes
     Take Screenshot
