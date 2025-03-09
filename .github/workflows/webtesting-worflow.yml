@@ -2,7 +2,8 @@ name: Run WEB Tests
 run-name: On Push - Web Tests Run
 on: [push]
 
-job:
+jobs:
     test:
-        - runs-on: ubuntu-20.04
-        - run: echo "Hello World"
+        runs-on: ubuntu-20.04
+        steps:
+            - run: echo "Hello World"
